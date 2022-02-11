@@ -1,4 +1,4 @@
-# How to test online functionality with both a client and a server
+### How to test online functionality with both a client and a server
 Writing stuff involving client-server net communication is important for most mods. Your mod is probably not that interesting if it doesn't need to do this.
 
 If you want to test the client-server communication side of your mod, you can start two simultaneous debug processes by clicking on ‘runServer’ followed by ‘runClient’.
