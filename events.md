@@ -1,6 +1,6 @@
 # Events
 
-Events
+### All about events
 Subscribing to events is pretty easy. The easiest way to do it is to have something like the following in your mod’s Main class:
 
 ```java
