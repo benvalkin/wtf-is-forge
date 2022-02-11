@@ -4,6 +4,7 @@
 Subscribing to events is pretty easy. The easiest way to do it is to have something like the following in your mod’s Main class:
 
 ```java
+// simple non-static event
 @SubscribeEvent
 public void OnPlayerConnected(PlayerEvent.PlayerLoggedInEvent event)
 {
@@ -12,7 +13,22 @@ public void OnPlayerConnected(PlayerEvent.PlayerLoggedInEvent event)
 }
 ```
 
-However, it is better practice to make a custom Handler class with a static handler method and register it into Forge’s event bus with an annotation like this:
+However, it is better practice to make a dedicated custom Handler class like this:
+
+```java
+// simple non-static event handler
+public class PlayerJoinedHandler
+{
+   @SubscribeEvent
+   public void OnPlayerConnected(PlayerEvent.PlayerLoggedInEvent event)
+   {
+      // do something with event
+      // this listens for the player logging in on the SERVER
+   }
+}
+```
+
+You can also make event handler methods static. But, if you want to do this, you have to **register it** into Forge’s event bus with an annotation like this:
 
 ```java
 // need this annotation to register the event. If this is missing, the event will never be detected
