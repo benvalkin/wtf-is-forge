@@ -10,9 +10,9 @@ Look at the following examples to see how a basic networking system is done usin
 
 ## How do you test networking stuff?
 
-If you want to test the client-server communication side of your mod, you can start two simultaneous debug processes by clicking on ‘runServer’ followed by ‘runClient’. Once your server starts up, you can join it with your client as you would an actual server. Click ‘Add Server’ and set the address to ‘localhost’.
+If you want to test the client-server communication side of your mod, you can start two simultaneous debug processes by clicking on `runServer` followed by `runClient` in the IntelliJ Gradle tab (on the right). Once your server starts up, you can join it with your client as you would an actual server. Click ‘Add Server’ and set the address to ‘localhost’.
 
-Important: Make sure to set online-mode=false in your project's server.properties file inside the ‘Run’ folder before starting up, otherwise when you try to connect your client will get an ‘Invalid Session’ connection refusal.
+**Important**: Make sure to set `online-mode=false` in your project's `server.properties` file inside the ‘Run’ folder before starting up, otherwise when you try to connect your client will get an ‘Invalid Session’ connection refusal.
 
 ## Step 1: Making a custom packet class
 ### Client to Server packets
