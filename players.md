@@ -9,12 +9,12 @@ Some stuff you can do with it:
 2) Construct a `Supplier<ServerPlayer>` from it:
 ```java
 public Supplier<ServerPlayer> ToSupplier(ServerPlayer player)
-    {
-        return new Supplier<ServerPlayer>() {
-            @Override
-            public ServerPlayer get() {
-                return player;
-            }
-        };
-    }
+{
+    return new Supplier<ServerPlayer>() {
+        @Override
+        public ServerPlayer get() {
+            return player;
+        }
+    };
+}
 ```
