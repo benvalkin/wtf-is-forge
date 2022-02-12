@@ -1,4 +1,4 @@
-## Dealing with player class
+## Dealing with player classes
 As with any game, there are dozen different player classes that do different things.
 
 ### `ServerPlayer`
