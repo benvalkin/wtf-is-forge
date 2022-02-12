@@ -1,5 +1,5 @@
-## How to make basic items
-This will show you how to create basic inert items that don't do anything.
+## How to make basic items (speedrun)
+This will show you how to create basic inert items that don't do anything as quick and easy as possible.
 
 ## Step 1: Make a Creative Tab for your mod
 This is necessary because all your items need to be registered with some sort of Creative Mode tab.
