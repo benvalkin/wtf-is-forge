@@ -6,6 +6,12 @@ As with any game, there are dozen different player classes that do different thi
 
 Some stuff you can do with it:
 1) Get it by casting a `Player`object when the in a server context
+```java
+public ServerPlayer FromPlayer(Player player)
+{
+    return (ServerPlayer) player;
+}
+```
 2) Construct a `Supplier<ServerPlayer>` from it:
 ```java
 public Supplier<ServerPlayer> ToSupplier(ServerPlayer player)
