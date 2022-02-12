@@ -4,7 +4,7 @@ Writing stuff involving client-server net communication is important for most mo
 
 Net calls with Forge aren't actually that scary. Forge has a special `SimpleChannel` class which abstracts away most of the bad stuff (the alternative is to use Netty as is).
 
-Just look at the following examples to see how it's done.
+Look at the following examples to see how a basic networking system is done using the `SimpleChannel` class.
 
 **Note**: this is a very basic example designed to get you started quickly. For better understanding, consult the official Forge docs.
 
