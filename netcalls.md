@@ -6,8 +6,8 @@ Just look at the following examples to see how it's done.
 
 **Note**: this is a very basic example designed to get you started quickly. For better understanding, consult the official Forge docs.
 
-### CLIENT to SERVER packets
-Here is a simple example of how you can make clients send packets to the server. For the other way round, see the next sub-heading.
+## CLIENT to SERVER packets
+Here is a simple example of how you can make a custom packet class that will be sent from clients to the server. For the other way round, see the next sub-heading.
 
 ```java
 public class TestServerPacket // this is your custom packet class. it will be sent from clients to the server.
@@ -40,52 +40,9 @@ public class TestServerPacket // this is your custom packet class. it will be se
     }
 }
 ```
-```java
-public class Networker {
-    private static final Logger LOG = LogManager.getLogger();
-    private static final String PROTOCOL_VERSION = "1";
 
-    // make a static SimpleChannel class member and initialize it like this. For more info on what each part does, consult the Official Forge docs.
-    private static final SimpleChannel INSTANCE = NetworkRegistry.newSimpleChannel(
-            new ResourceLocation("agricultured", "main"),
-            () -> PROTOCOL_VERSION,
-            PROTOCOL_VERSION::equals,
-            PROTOCOL_VERSION::equals
-    );
-
-    // here is where you tell your mod to start listening for your custom packet. Make sure you call INSTANCE.registerMessage at some point when your mod starts up
-    public static void RegisterMessages()
-    {
-        INSTANCE.registerMessage(
-                420, // unique ID number. Can be anything, but make sure it's unique to your other Messages or there will probably be issues.
-                TestServerPacket.class,
-                TestServerPacket::Encode,
-                TestServerPacket::new,
-                TestServerPacket::Process
-        );
-
-    }
-    // send a custom packet to the server
-    public static void SendToServer(TestServerPacket test)
-    {
-        INSTANCE.sendToServer(test);
-    }
-}
-```
-Now, all that's left to do is send a packet to the server in some way or another. Here, the packet is send when the client joins.
-```java
-@Mod.EventBusSubscriber(modid = "agricultured", bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
-public class TestHandler {
-    @SubscribeEvent
-    public static void drawLast(ClientPlayerNetworkEvent.LoggedInEvent event) {
-        System.out.println("Player logged in on client");
-        Networker.SendToServer(new TestPacket("HELLO :D :D"));
-    }
-}
-```
-
-### SERVER to CLIENT packets
-Here is a simple example of how you can make the server send packets to clients.
+## SERVER to CLIENT packets
+Here is a simple example of how you can make a custom packet that will be send from the server to clients. It's the same as before aside from the Process() method, and the addition of a ClientPacketHandler class.
 
 ```java
 public class TestClientPacket // another custom packet class. It's identical to the previous packet class aside from the Process() method.
@@ -130,14 +87,74 @@ class ClientPacketHandler
     }
 }
 ```
+
+## Registering ending the packets
+
+Here is how you actually send packet between clients and server, and how you register your custom packets for listening and handling.
+It can all be done with some sort of custom NetworkManager class like this:
+
 ```java
-        // probably don't need to mention this, but remember to add this to RegisterMethods()
+    public class Networker {
+    private static final Logger LOG = LogManager.getLogger();
+    private static final String PROTOCOL_VERSION = "1";
+
+    // make a static SimpleChannel class member and initialize it like this. For more info on what each part does, consult the Official Forge docs.
+    private static final SimpleChannel INSTANCE = NetworkRegistry.newSimpleChannel(
+            new ResourceLocation("agricultured", "main"),
+            () -> PROTOCOL_VERSION,
+            PROTOCOL_VERSION::equals,
+            PROTOCOL_VERSION::equals
+    );
+
+    // here is where you tell your mod to start listening for your custom packet. Make sure you do this for all your custom packets at some point when your mod starts up
+    public static void RegisterMessages()
+    {
         INSTANCE.registerMessage(
-                421, // use a different ID. Forge recommends you assign IDs in a for loop to be safe
+                420, // unique ID number. Can be anything, but make sure it's unique to your other Messages or there will probably be issues.
+                TestServerPacket.class,
+                TestServerPacket::Encode,
+                TestServerPacket::new,
+                TestServerPacket::Process
+        );
+
+        INSTANCE.registerMessage(
+                421, // a different ID number
                 TestClientPacket.class,
                 TestClientPacket::Encode,
                 TestClientPacket::new,
                 TestClientPacket::Process
         );
+
+    }
+    // send your custom server packet to the server
+    public static void SendToServer(TestServerPacket test)
+    {
+        INSTANCE.sendToServer(test);
+    }
+
+    // send your custom client packet to the server
+    public static void SendToClientAnnoyingWay(ServerPlayer player, TestClientPacket packet) // annoying because it requires you to have an instance of ServerPlayer i think
+    {
+        INSTANCE.sendTo(packet, player.connection.getConnection(), NetworkDirection.PLAY_TO_CLIENT);
+    }
+
+    // some better methods that are more convenient
+    public static void SendToClient(Supplier<ServerPlayer> player, TestClientPacket packet)
+    {
+        // Send to one player
+        INSTANCE.send(PacketDistributor.PLAYER.with(player), packet);
+    }
+    public static void SendToAllClientsWithChunkLoaded(Supplier<LevelChunk> chunk, TestClientPacket packet)
+    {
+        // Send to all players tracking this level chunk
+        INSTANCE.send(PacketDistributor.TRACKING_CHUNK.with(chunk), packet);
+    }
+    public static void SendToAllClients(TestClientPacket packet)
+    {
+        // Send to all clients connected to the server
+        INSTANCE.send(PacketDistributor.ALL.noArg(), packet);
+    }
+}
 ```
+
 
