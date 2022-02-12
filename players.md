@@ -5,7 +5,7 @@ As with any game, there are dozen different player classes that do different thi
 `ServerPlayer` is the main class that the dedicated server uses to manage players.
 
 #### How to get it
-1) By casting a `Player`object when the in a server context
+1) By casting a `Player` object (only works in server context)
 ```java
 public ServerPlayer FromPlayer(Player player)
 {
