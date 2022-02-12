@@ -73,7 +73,7 @@ public class ItemRegister
 ```
 
 ## Step 4: The resources part (texture, model and translations)
-Your resources folder should look something like this. If it does not look like this, make sure it does. Your file structure should be the same as this screenshot:
+Your resources folder should look something like this. If it does not look like this, make sure it does. Your file structure should be the same as this screenshot (you can ignore the stuff about Blocks if you're not using going to be using any block items):
 
 ![image](https://user-images.githubusercontent.com/69928007/153730274-205aeff1-9c4a-40e9-bb33-faf3c2d4d6ba.png)
 
