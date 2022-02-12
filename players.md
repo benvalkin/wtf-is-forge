@@ -7,10 +7,7 @@ As with any game, there are dozen different player classes that do different thi
 #### How to get it
 1) By casting a `Player` object (only works in server context)
 ```java
-public ServerPlayer FromPlayer(Player player)
-{
-    return (ServerPlayer) player;
-}
+public ServerPlayer FromPlayer(Player player) { return (ServerPlayer) player; }
 ```
 #### Some stuff you can do with it
 1) Construct a `Supplier<ServerPlayer>` from it
