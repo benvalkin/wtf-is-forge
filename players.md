@@ -8,10 +8,13 @@ Some stuff you can do with it:
 1) Get it by casting a `Player`object when the in a server context
 2) Construct a `Supplier<ServerPlayer>` from it:
 ```java
-Supplier<ServerPlayer> supplier = new Supplier<ServerPlayer>() {
+public Supplier<ServerPlayer> ToSupplier(ServerPlayer player)
+    {
+        return new Supplier<ServerPlayer>() {
             @Override
             public ServerPlayer get() {
-                return (ServerPlayer) event.getPlayer();
+                return player;
             }
         };
+    }
 ```
