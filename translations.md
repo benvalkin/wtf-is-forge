@@ -3,6 +3,7 @@
 ### What are translations?
 Translations are just a big config file for human readable text that gets displayed in game (with things like item names, GUIs, and chat messages), because it wouldn't be a good idea hardcode that sort of thing. Translations also allow you to add different language support so that people in other countries can read and understand it. If you've developed stuff for other games, you didn't need to read all this paragraph.
 
+## How Forge translations work
 Translations for Forge mods are written in the form of a JSON dictionary that resides in a file inside `src\main\resources\assets\yourmodid\lang`.
 
 To add English translations, make a folder in this directory called `en_us.json`. Make sure the file named correctly otherwise it will not work.
@@ -16,7 +17,7 @@ Here is what the file should look like. It should contain translations for all i
 You might notice that for items, the translation key format is `item.modid.itemname`.
 So any time you want to add a translation for a new item, you need to add a new JSON dictionary entry in the translations file of your desired language.
 
-## Hold up, the `item.modid.itemname` format looks familiar...
+### Hold up, the `item.modid.itemname` format looks familiar...
 
 If you've played modded Minecraft before, you might have seen something like this in some (not-so-polished) mods:
 
