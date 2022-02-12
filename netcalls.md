@@ -6,20 +6,21 @@ Just look at the following examples to see how it's done.
 
 **Note**: this is a very basic example designed to get you started quickly. For better understanding, consult the official Forge docs.
 
-### A simple example
+### CLIENT to SERVER packets
+Here is a simple example of how you can make clients send packets to the server. For the other way round, see the next sub-heading.
 
 ```java
-public class TestPacket // this is your custom packet class. it will be sent to-and-from servers
+public class TestServerPacket // this is your custom packet class. it will be sent from clients to the server.
 {
     private static final Logger LOG = LogManager.getLogger();
 
     public String message; // the data we want to transfer, in this case a simple string
 
-    public TestPacket(String message)
+    public TestServerPacket(String message) // basic constructor
     {
         this.message = message;
     }
-    public TestPacket(FriendlyByteBuf buffer) // this method controls how the packet is decoded upon arrival. (you might notice it's just a constructor that takes in a FriendlyByteBuf
+    public TestServerPacket(FriendlyByteBuf buffer) // this method controls how the packet is decoded upon arrival. (you might notice it's just a constructor that takes in a FriendlyByteBuf)
     {
         this.message = buffer.readUtf();
     }
@@ -31,7 +32,7 @@ public class TestPacket // this is your custom packet class. it will be sent to-
     {
         ctx.get().enqueueWork(()->
         {
-            LOG.info("PACKET RECEIVED :D");
+            LOG.info("PACKET RECEIVED BY SERVER :D");
             LOG.info("  From: " + ctx.get().getSender().getScoreboardName());
             LOG.info("  Message from the packet: " + this.message);
         });
@@ -56,16 +57,16 @@ public class Networker {
     public static void RegisterMessages()
     {
         INSTANCE.registerMessage(
-                0,
-                TestPacket.class,
-                TestPacket::Encode,
-                TestPacket::new,
-                TestPacket::Process
+                420, // unique ID number. Can be anything, but make sure it's unique to your other Messages or there will probably be issues.
+                TestServerPacket.class,
+                TestServerPacket::Encode,
+                TestServerPacket::new,
+                TestServerPacket::Process
         );
 
     }
     // send a custom packet to the server
-    public static void SendToServer(TestPacket test)
+    public static void SendToServer(TestServerPacket test)
     {
         INSTANCE.sendToServer(test);
     }
