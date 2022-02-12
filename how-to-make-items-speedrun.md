@@ -19,6 +19,7 @@ public class Agricultured
             return new ItemStack(Items.BAKED_POTATO); // uses the Baked Potato icon for the creative tab
         };
     };
+}
 ```
 
 ## Step 2: make an ItemRegister class
