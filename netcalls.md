@@ -6,7 +6,7 @@ Just look at the following examples to see how it's done.
 
 **Note**: this is a very basic example designed to get you started quickly. For better understanding, consult the official Forge docs.
 
-## CLIENT to SERVER packets
+## Client to Server packets
 Here is a simple example of how you can make a custom packet class that will be sent from clients to the server. For the other way round, see the next sub-heading.
 
 ```java
@@ -41,7 +41,7 @@ public class TestServerPacket // this is your custom packet class. it will be se
 }
 ```
 
-## SERVER to CLIENT packets
+## Server to Client packets
 Here is a simple example of how you can make a custom packet that will be send from the server to clients. It's the same as before aside from the Process() method, and the addition of a ClientPacketHandler class.
 
 ```java
@@ -88,10 +88,10 @@ class ClientPacketHandler
 }
 ```
 
-## Registering ending the packets
+## Registering and sending over packets
 
-Here is how you actually send packet between clients and server, and how you register your custom packets for listening and handling.
-It can all be done with some sort of custom NetworkManager class like this:
+Here is how you actually send packet between clients and server, and how you register your custom packets so that you mod can listen out for them.
+It can all be done with some sort of custom NetworkManager class that has a static instance of `SimpleChannel` as a member. Something like this:
 
 ```java
     public class Networker {
@@ -106,7 +106,8 @@ It can all be done with some sort of custom NetworkManager class like this:
             PROTOCOL_VERSION::equals
     );
 
-    // here is where you tell your mod to start listening for your custom packet. Make sure you do this for all your custom packets at some point when your mod starts up
+    // here is where you tell your mod to start listening for your custom packet. Make sure you do this for all your custom packets at some point when your mod starts up.
+    // If you don't register your packet with INSTANCE.registerMessage
     public static void RegisterMessages()
     {
         INSTANCE.registerMessage(
