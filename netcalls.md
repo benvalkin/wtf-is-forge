@@ -168,4 +168,10 @@ It can all be done with some sort of custom NetworkManager class that has a stat
 }
 ```
 
+## Step 3: Improving this system
+You should now have a basic feel for how net calls work with Forge.
 
+From here, you should:
+1) Figure out how to encode more complex packets using `FriendlyByteBuf`
+2) Make an `IPacket` interface for your custom packets to allow neater packet registration and handling
+3) Register your packets using a for loop with incremented IDs (not individually as done above)
