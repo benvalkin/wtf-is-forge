@@ -17,7 +17,7 @@ Here is what the file should look like. It should contain translations for all i
 You might notice that for items, the translation key format is `item.modid.itemname`.
 So any time you want to add a translation for a new item, you need to add a new JSON dictionary entry in the translations file of your desired language.
 
-### Hold up, the `item.modid.itemname` format looks familiar...
+## Hold up, the `item.modid.itemname` format looks familiar...
 
 If you've played modded Minecraft before, you might have seen something like this in some (not-so-polished) mods:
 
