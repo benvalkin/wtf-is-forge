@@ -85,7 +85,7 @@ Also, if you haven't already, add a translation for your **mod name** with the k
 ![image](https://user-images.githubusercontent.com/69928007/153730522-63d2ae9d-ccae-4f9e-8bb7-f4e0e04599d8.png)
 
 #### Model
-This part is custom for block items and custom model items, but you still need a .json file for basic items like sticks and food. Again, make sure the item ID is the one you used to register your item above.
+This part is custom for block items and custom model items, but you still need a .json file for basic items like sticks and food. Again, make sure the mod ID and item ID are the ones you used to register your item above.
 
 ![image](https://user-images.githubusercontent.com/69928007/153730462-8546cea3-3a20-4c59-950e-e483befc9083.png)
 
