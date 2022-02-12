@@ -99,7 +99,8 @@ It can all be done with some sort of custom NetworkManager class that has a stat
     private static final Logger LOG = LogManager.getLogger();
     private static final String PROTOCOL_VERSION = "1";
 
-    // make a static SimpleChannel class member and initialize it like this. For more info on what each part does, consult the Official Forge docs.
+    // make a static SimpleChannel class member and initialize it like this.
+    // To understand what all of the arguments mean, consult the Official Forge docs.
     private static final SimpleChannel INSTANCE = NetworkRegistry.newSimpleChannel(
             new ResourceLocation("agricultured", "main"),
             () -> PROTOCOL_VERSION,
@@ -108,7 +109,7 @@ It can all be done with some sort of custom NetworkManager class that has a stat
     );
 
     // here is where you tell your mod to start listening for your custom packet. Make sure you do this for all your custom packets at some point when your mod starts up.
-    // If you don't register your packet with INSTANCE.registerMessage
+    // If you don't register your packet with INSTANCE.registerMessage(), you will probably get some sort of errors about Unidentified Packets (or maybe nothing will happen)
     public static void RegisterMessages()
     {
         INSTANCE.registerMessage(
